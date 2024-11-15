@@ -1,3 +1,5 @@
+package singlefileclasses;
+
 public class StringEX_4 {
 
     public static void main(String[] args) {

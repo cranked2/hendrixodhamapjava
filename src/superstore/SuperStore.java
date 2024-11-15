@@ -1,99 +1,105 @@
+package superstore;
+
 import java.util.Scanner;
 
 public class SuperStore {
-    private static final int RUBLES_PER_SCALLY_WAG = 29;
-    private static final int SCALLY_WAGS_PER_BUCKEROO = 17;
-    private static final int RUBLES_PER_BUCKEROO = RUBLES_PER_SCALLY_WAG * SCALLY_WAGS_PER_BUCKEROO;
 
-    private static final String MEMBER_PASSWORD = "$uperDooper";
-    private static final double MEMBER_DISCOUNT = 0.10;
-
-    private static final double SHIELD_PRICE = 12;
-    private static final double SHIELD_DISCOUNT_PRICE = 10;
-    private static final double ARMOR_PRICE = 116;
-    private static final double ARMOR_MEMBER_PRICE = 100;
-    private static final double SMALL_GADGET_PRICE = 50;
-    private static final double LARGE_GADGET_PRICE = 70;
-    private static final double LARGE_GADGET_MEMBER_PRICE = 58;
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        boolean anotherCustomer = true;
+        String logo = "" +
+                "      ___           ___                         ___           ___                    ___                         ___           ___           ___     \n" +
+                "     /  /\\         /  /\\          ___          /  /\\         /  /\\                  /  /\\          ___          /  /\\         /  /\\         /  /\\    \n" +
+                "    /  /::\\       /  /:/         /  /\\        /  /::\\       /  /::\\                /  /::\\        /__/\\        /  /::\\       /  /::\\       /  /::\\   \n" +
+                "   /__/:/\\:\\     /  /:/         /  /::\\      /  /:/\\:\\     /  /:/\\:\\              /__/:/\\:\\       \\  \\:\\      /  /:/\\:\\     /  /:/\\:\\     /  /:/\\:\\  \n" +
+                "  _\\_ \\:\\ \\:\\   /  /:/         /  /:/\\:\\    /  /::\\ \\:\\   /  /::\\ \\:\\            _\\_ \\:\\ \\:\\       \\__\\:\\    /  /:/  \\:\\   /  /::\\ \\:\\   /  /::\\ \\:\\ \n" +
+                " /__/\\ \\:\\ \\:\\ /__/:/     /\\  /  /::\\ \\:\\  /__/:/\\:\\ \\:\\ /__/:/\\:\\_\\:\\          /__/\\ \\:\\ \\:\\      /  /::\\  /__/:/ \\__\\:\\ /__/:/\\:\\_\\:\\ /__/:/\\:\\ \\:\\\n" +
+                " \\  \\:\\ \\:\\_\\/ \\  \\:\\    /:/ /__/:/\\:\\_\\:\\ \\  \\:\\ \\:\\_\\/ \\__\\/~|::\\/:/          \\  \\:\\ \\:\\_\\/     /  /:/\\:\\ \\  \\:\\ /  /:/ \\__\\/~|::\\/:/ \\  \\:\\ \\:\\_\\/\n" +
+                "  \\  \\:\\_\\:\\    \\  \\:\\  /:/  \\__\\/  \\:\\/:/  \\  \\:\\ \\:\\      |  |:|::/            \\  \\:\\_\\:\\      /  /:/__\\/  \\  \\:\\  /:/     |  |:|::/   \\  \\:\\ \\:\\  \n" +
+                "   \\  \\:\\/:/     \\  \\:\\/:/        \\  \\::/    \\  \\:\\_\\/      |  |:|\\/              \\  \\:\\/:/     /__/:/        \\  \\:\\/:/      |  |:|\\/     \\  \\:\\_\\/  \n" +
+                "    \\  \\::/       \\  \\::/          \\__\\/      \\  \\:\\        |__|:|~                \\  \\::/      \\__\\/          \\  \\::/       |__|:|~       \\  \\:\\    \n" +
+                "     \\__\\/         \\__\\/                       \\__\\/         \\__\\|                  \\__\\/                       \\__\\/         \\__\\|         \\__\\/    ";
 
-        System.out.println("Welcome to the Super Store!");
+       Scanner sc = new Scanner(System.in);
 
-        while (anotherCustomer) {
-            System.out.print("Is there a customer in line? (1 = yes, 2 = no) > ");
-            if (scanner.nextInt() == 2) break;
-            scanner.nextLine(); // Consume newline
+        int rpsw = 29;
+        int swpb = 17;
+        int rpb = rpsw * swpb;
 
-            boolean isMember = checkMembership(scanner);
+        String pass = "$uperDooper";
+        double discount = 0.10;
 
-            // Display pricing information based on membership status
+        double sp = 12;
+        double ap = 116;
+        double lgp = 70;
+        double sgp = 40;
+
+        System.out.println(logo);
+        System.out.println("Is there a customer in line? (1 = yes, 2 = no) > ");
+        int selection = 0;
+
+
+        do {
+            boolean isMember = checkMembership(sc,"$uperDooper");
+
             displayPriceList(isMember);
 
-            // Customer's order variables
             int shields = 0, armor = 0, smallGadgets = 0, largeGadgets = 0;
 
-            // Order update loop
-            boolean checkout = false;
-            while (!checkout) {
+            int checkout = 0;
+            while (checkout != 1) {
                 System.out.println("Please choose an option:");
                 System.out.println("    1) Update Shields Order");
                 System.out.println("    2) Update Armor Order");
                 System.out.println("    3) Update Super Gadget Order");
                 System.out.println("    4) Check Out");
 
-                int choice = scanner.nextInt();
-                scanner.nextLine(); // Consume newline
+                int choice = sc.nextInt();
+                sc.nextLine();
 
                 switch (choice) {
                     case 1:
-                        shields = updateShields(scanner, isMember);
+                        shields = updateShields(sc);
                         break;
                     case 2:
-                        armor = updateArmor(scanner);
+                        armor = updateArmor(sc);
                         break;
                     case 3:
-                        int[] gadgets = updateGadgets(scanner);
-                        smallGadgets = gadgets[0];
-                        largeGadgets = gadgets[1];
+                        smallGadgets = updateSmallGadgets(sc);
+                        largeGadgets = updateLargeGadgets(sc);
                         break;
                     case 4:
-                        checkout = true;
+                        checkout = 1;
                         break;
                 }
             }
-
-            // Calculate and display subtotal
-            double total = calculateTotal(shields, armor, smallGadgets, largeGadgets, isMember);
+            double total = calculateTotal(shields, armor, smallGadgets, largeGadgets, isMember,discount,sp,rpsw,ap,sgp,lgp);
             if (isMember && total >= 1000) {
-                System.out.printf("Bonus discount of 10%%: -%.2f\n", total * MEMBER_DISCOUNT);
-                total *= (1 - MEMBER_DISCOUNT);
+                System.out.printf("Bonus discount of 10%%: -%.2f\n", total * discount);
+                total *= (1 - discount);
             }
             System.out.printf("New Total: %.2f\n", total);
 
-            // Payment processing
-            processPayment(scanner, total);
+            processPayment(sc, total,rpsw,rpb);
 
             System.out.println("\nThank you for shopping at the Super Store!\n");
-        }
 
-        scanner.close();
+            sc.close();
+        }while(selection != 2);
+
     }
 
-    private static boolean checkMembership(Scanner scanner) {
+    private static boolean checkMembership(Scanner sc,String member_password) {
         System.out.print("What is the password? ");
-        String password = scanner.nextLine();
-        if (password.equals(MEMBER_PASSWORD)) {
+        String password = sc.nextLine();
+        if (password.equals(member_password)) {
             System.out.println("Welcome Very Super member!");
             System.out.println("You will get special discounts at the Super Store!");
             return true;
         } else {
             System.out.println("Sorry but that is not right. We will give you one more chance.");
             System.out.print("What is the password? ");
-            password = scanner.nextLine();
-            if (password.equals(MEMBER_PASSWORD)) {
+            password = sc.nextLine();
+            if (password.equals(member_password)) {
                 System.out.println("Welcome Very Super member!");
                 return true;
             }
@@ -119,54 +125,61 @@ public class SuperStore {
         }
     }
 
-    private static int updateShields(Scanner scanner, boolean isMember) {
+    private static int updateShields(Scanner sc) {
         System.out.println("How many Shields would you like?");
-        return scanner.nextInt();
+        return sc.nextInt();
     }
 
-    private static int updateArmor(Scanner scanner) {
+    private static int updateArmor(Scanner sc) {
         System.out.println("How much Armor would you like?");
-        return scanner.nextInt();
+        return sc.nextInt();
     }
 
-    private static int[] updateGadgets(Scanner scanner) {
+    private static int updateSmallGadgets(Scanner sc) {
         System.out.println("How many small Super Gadgets would you like?");
-        int small = scanner.nextInt();
-        System.out.println("How many large Super Gadgets would you like?");
-        int large = scanner.nextInt();
-        return new int[]{small, large};
+        int small = sc.nextInt();
+        return small;
     }
 
-    private static double calculateTotal(int shields, int armor, int smallGadgets, int largeGadgets, boolean isMember) {
+    private static int updateLargeGadgets(Scanner sc) {
+        System.out.println("How many large Super Gadgets would you like?");
+        int large = sc.nextInt();
+        return large;
+    }
+
+    private static double calculateTotal(int shields, int armor, int smallGadgets, int largeGadgets, boolean isMember,double member_discount,double shield_price,int rubles_per_scaly_wag,double armor_price,double small_gadget_price,double large_gadget_price) {
         double total = 0;
+        double shield_discount = member_discount * shield_price + shield_price;
+        double armor_discount = member_discount * armor_price + armor_price;
+        double large_gadget_discount = member_discount * large_gadget_price + large_gadget_price;
 
-        if (shields >= 5) total += shields * (isMember ? SHIELD_DISCOUNT_PRICE : RUBLES_PER_SCALLY_WAG * 2);
-        else total += shields * SHIELD_PRICE;
+        if (shields >= 5) total += shields * (isMember ? shield_discount : rubles_per_scaly_wag * 2);
+        else total += shields * shield_price;
 
-        total += armor * (isMember ? ARMOR_MEMBER_PRICE : ARMOR_PRICE);
-        total += smallGadgets * SMALL_GADGET_PRICE;
-        total += largeGadgets * (isMember ? LARGE_GADGET_MEMBER_PRICE : LARGE_GADGET_PRICE);
+        total += armor * (isMember ? armor_discount : armor_price);
+        total += smallGadgets * small_gadget_price;
+        total += largeGadgets * (isMember ? large_gadget_discount : large_gadget_price);
 
         System.out.printf("Total: %.2f\n", total);
         return total;
     }
 
-    private static void processPayment(Scanner scanner, double total) {
+    private static void processPayment(Scanner sc, double total,int rubles_per_scaly_wag,int rubles_per_buckaroo) {
         double amountPaid = 0;
         while (amountPaid < total) {
             System.out.print("Please enter your payment amount (e.g., '3 Buckeroos'): ");
-            int amount = scanner.nextInt();
-            String currency = scanner.next();
+            int amount = sc.nextInt();
+            String currency = sc.next();
             
             switch (currency.toLowerCase()) {
                 case "rubles":
                     amountPaid += amount;
                     break;
                 case "scallywags":
-                    amountPaid += amount * RUBLES_PER_SCALLY_WAG;
+                    amountPaid += amount * rubles_per_scaly_wag;
                     break;
                 case "buckeroos":
-                    amountPaid += amount * RUBLES_PER_BUCKEROO;
+                    amountPaid += amount * rubles_per_buckaroo;
                     break;
             }
             if (amountPaid < total) {

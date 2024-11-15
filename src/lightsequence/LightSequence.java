@@ -1,3 +1,5 @@
+package lightsequence;
+
 public class LightSequence
 {
     private String seq;

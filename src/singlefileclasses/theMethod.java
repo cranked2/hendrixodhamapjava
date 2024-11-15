@@ -1,4 +1,7 @@
+package singlefileclasses;
+
 import java.util.Scanner;
+
 public class theMethod
 {
     public static Scanner sc = new Scanner(System.in);

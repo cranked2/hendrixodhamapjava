@@ -1,3 +1,5 @@
+package lightsequence;
+
 import java.util.Scanner;
 public class lightDriver
 {

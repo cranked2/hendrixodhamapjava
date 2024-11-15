@@ -1,9 +1,4 @@
-// ***************************************************************
-// FILE:  StringManips.java
-// Author:
-//
-// Purpose: Test several methods for manipulating String objects
-// ***************************************************************
+package singlefileclasses;
 
 import java.util.Scanner;
 

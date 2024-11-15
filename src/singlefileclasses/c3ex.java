@@ -1,3 +1,5 @@
+package singlefileclasses;
+
 import java.util.Scanner;
 
 public class c3ex {

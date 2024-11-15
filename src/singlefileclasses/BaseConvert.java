@@ -1,6 +1,4 @@
-/*BaseConvert.java
- *CS 0401 Lab 2
- **/
+package singlefileclasses;
 
 import java.util.Scanner;
 
