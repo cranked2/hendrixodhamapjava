@@ -24,8 +24,9 @@ public class SuperStore {
         int rpsw = 29;
         int swpb = 17;
         int rpb = rpsw * swpb;
+        int selection;
 
-        String pass = "$uperDooper";
+        String pass = "SigmaOverlords";
         double discount = 0.10;
 
         double sp = 12;
@@ -34,13 +35,19 @@ public class SuperStore {
         double sgp = 40;
 
         System.out.println(logo);
-        System.out.println("Is there a customer in line? (1 = yes, 2 = no) > ");
-        int selection = 0;
 
 
         do {
-            boolean isMember = checkMembership(sc,"$uperDooper");
+            System.out.println("Is there a customer in line? (1 = yes, 2 = no) > ");
+            selection = Integer.parseInt(sc.nextLine());;
+            
+            if (selection == 2)
+            {
+                System.out.println("BYE");
+                break;
+            }
 
+            boolean isMember = checkMembership(sc,pass);
             displayPriceList(isMember);
 
             int shields = 0, armor = 0, smallGadgets = 0, largeGadgets = 0;
@@ -53,8 +60,7 @@ public class SuperStore {
                 System.out.println("    3) Update Super Gadget Order");
                 System.out.println("    4) Check Out");
 
-                int choice = sc.nextInt();
-                sc.nextLine();
+                int choice = Integer.parseInt(sc.nextLine());
 
                 switch (choice) {
                     case 1:
@@ -82,14 +88,13 @@ public class SuperStore {
             processPayment(sc, total,rpsw,rpb);
 
             System.out.println("\nThank you for shopping at the Super Store!\n");
-
-            sc.close();
-        }while(selection != 2);
+        }while(selection != 2 );
+        sc.close();
 
     }
 
     private static boolean checkMembership(Scanner sc,String member_password) {
-        System.out.print("What is the password? ");
+        System.out.print("What is the password? hint SigmaOverlords");
         String password = sc.nextLine();
         if (password.equals(member_password)) {
             System.out.println("Welcome Very Super member!");
@@ -127,23 +132,23 @@ public class SuperStore {
 
     private static int updateShields(Scanner sc) {
         System.out.println("How many Shields would you like?");
-        return sc.nextInt();
+        return Integer.parseInt(sc.nextLine());
     }
 
     private static int updateArmor(Scanner sc) {
         System.out.println("How much Armor would you like?");
-        return sc.nextInt();
+        return  Integer.parseInt(sc.nextLine());
     }
 
     private static int updateSmallGadgets(Scanner sc) {
         System.out.println("How many small Super Gadgets would you like?");
-        int small = sc.nextInt();
+        int small = Integer.parseInt(sc.nextLine());
         return small;
     }
 
     private static int updateLargeGadgets(Scanner sc) {
         System.out.println("How many large Super Gadgets would you like?");
-        int large = sc.nextInt();
+        int large =  Integer.parseInt(sc.nextLine());
         return large;
     }
 
@@ -168,14 +173,14 @@ public class SuperStore {
         double amountPaid = 0;
         while (amountPaid < total) {
             System.out.print("Please enter your payment amount (e.g., '3 Buckeroos'): ");
-            int amount = sc.nextInt();
-            String currency = sc.next();
+            int amount = Integer.parseInt(sc.nextLine());
+            String currency = sc.nextLine();
             
             switch (currency.toLowerCase()) {
                 case "rubles":
                     amountPaid += amount;
                     break;
-                case "scallywags":
+                case "scally wags":
                     amountPaid += amount * rubles_per_scaly_wag;
                     break;
                 case "buckeroos":
