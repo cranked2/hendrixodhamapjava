@@ -7,17 +7,13 @@ public class SuperStore {
 
     public static void main(String[] args) {
         String logo = "" +
-                "      ___           ___                         ___           ___                    ___                         ___           ___           ___     \n" +
-                "     /  /\\         /  /\\          ___          /  /\\         /  /\\                  /  /\\          ___          /  /\\         /  /\\         /  /\\    \n" +
-                "    /  /::\\       /  /:/         /  /\\        /  /::\\       /  /::\\                /  /::\\        /__/\\        /  /::\\       /  /::\\       /  /::\\   \n" +
-                "   /__/:/\\:\\     /  /:/         /  /::\\      /  /:/\\:\\     /  /:/\\:\\              /__/:/\\:\\       \\  \\:\\      /  /:/\\:\\     /  /:/\\:\\     /  /:/\\:\\  \n" +
-                "  _\\_ \\:\\ \\:\\   /  /:/         /  /:/\\:\\    /  /::\\ \\:\\   /  /::\\ \\:\\            _\\_ \\:\\ \\:\\       \\__\\:\\    /  /:/  \\:\\   /  /::\\ \\:\\   /  /::\\ \\:\\ \n" +
-                " /__/\\ \\:\\ \\:\\ /__/:/     /\\  /  /::\\ \\:\\  /__/:/\\:\\ \\:\\ /__/:/\\:\\_\\:\\          /__/\\ \\:\\ \\:\\      /  /::\\  /__/:/ \\__\\:\\ /__/:/\\:\\_\\:\\ /__/:/\\:\\ \\:\\\n" +
-                " \\  \\:\\ \\:\\_\\/ \\  \\:\\    /:/ /__/:/\\:\\_\\:\\ \\  \\:\\ \\:\\_\\/ \\__\\/~|::\\/:/          \\  \\:\\ \\:\\_\\/     /  /:/\\:\\ \\  \\:\\ /  /:/ \\__\\/~|::\\/:/ \\  \\:\\ \\:\\_\\/\n" +
-                "  \\  \\:\\_\\:\\    \\  \\:\\  /:/  \\__\\/  \\:\\/:/  \\  \\:\\ \\:\\      |  |:|::/            \\  \\:\\_\\:\\      /  /:/__\\/  \\  \\:\\  /:/     |  |:|::/   \\  \\:\\ \\:\\  \n" +
-                "   \\  \\:\\/:/     \\  \\:\\/:/        \\  \\::/    \\  \\:\\_\\/      |  |:|\\/              \\  \\:\\/:/     /__/:/        \\  \\:\\/:/      |  |:|\\/     \\  \\:\\_\\/  \n" +
-                "    \\  \\::/       \\  \\::/          \\__\\/      \\  \\:\\        |__|:|~                \\  \\::/      \\__\\/          \\  \\::/       |__|:|~       \\  \\:\\    \n" +
-                "     \\__\\/         \\__\\/                       \\__\\/         \\__\\|                  \\__\\/                       \\__\\/         \\__\\|         \\__\\/    ";
+                "███████╗██╗   ██╗██████╗ ███████╗██████╗     ███████╗████████╗ ██████╗ ██████╗ ███████╗\n" +
+                "██╔════╝██║   ██║██╔══██╗██╔════╝██╔══██╗    ██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗██╔════╝\n" +
+                "███████╗██║   ██║██████╔╝█████╗  ██████╔╝    ███████╗   ██║   ██║   ██║██████╔╝█████╗  \n" +
+                "╚════██║██║   ██║██╔═══╝ ██╔══╝  ██╔══██╗    ╚════██║   ██║   ██║   ██║██╔══██╗██╔══╝  \n" +
+                "███████║╚██████╔╝██║     ███████╗██║  ██║    ███████║   ██║   ╚██████╔╝██║  ██║███████╗\n" +
+                "╚══════╝ ╚═════╝ ╚═╝     ╚══════╝╚═╝  ╚═╝    ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝\n" +
+                "                                                                                      ";
 
        Scanner sc = new Scanner(System.in);
 
@@ -41,7 +37,7 @@ public class SuperStore {
             System.out.println("Is there a customer in line? (1 = yes, 2 = no) > ");
             selection = Integer.parseInt(sc.nextLine());;
             
-            if (selection == 2)
+            if (selection != 1)
             {
                 System.out.println("BYE");
                 break;
@@ -94,7 +90,7 @@ public class SuperStore {
     }
 
     private static boolean checkMembership(Scanner sc,String member_password) {
-        System.out.print("What is the password? hint SigmaOverlords");
+        System.out.print("What is the password? (hint SigmaOverlords): ");
         String password = sc.nextLine();
         if (password.equals(member_password)) {
             System.out.println("Welcome Very Super member!");
@@ -136,6 +132,7 @@ public class SuperStore {
     }
 
     private static int updateArmor(Scanner sc) {
+
         System.out.println("How much Armor would you like?");
         return  Integer.parseInt(sc.nextLine());
     }
@@ -172,9 +169,10 @@ public class SuperStore {
     private static void processPayment(Scanner sc, double total,int rubles_per_scaly_wag,int rubles_per_buckaroo) {
         double amountPaid = 0;
         while (amountPaid < total) {
-            System.out.print("Please enter your payment amount (e.g., '3 Buckeroos'): ");
-            int amount = Integer.parseInt(sc.nextLine());
+            System.out.print("Please enter your payment type (e.g Buckeroos'): ");
             String currency = sc.nextLine();
+            System.out.print("Please enter your payment amount : ");
+            int amount = Integer.parseInt(sc.nextLine());
             
             switch (currency.toLowerCase()) {
                 case "rubles":
