@@ -162,6 +162,11 @@ public class SuperStore {
         total += smallGadgets * small_gadget_price;
         total += largeGadgets * (isMember ? large_gadget_discount : large_gadget_price);
 
+        System.out.printf("    Shields (each)            11 Rubles");
+        System.out.printf("   armor           11 Rubles");
+        System.out.printf("    large_gadget_discount           11 Rubles");
+        System.out.printf("    Shields (each)            11 Rubles");
+
         System.out.printf("Total: %.2f\n", total);
         return total;
     }
@@ -169,7 +174,7 @@ public class SuperStore {
     private static void processPayment(Scanner sc, double total,int rubles_per_scaly_wag,int rubles_per_buckaroo) {
         double amountPaid = 0;
         while (amountPaid < total) {
-            System.out.print("Please enter your payment type (e.g Buckeroos'): ");
+            System.out.print("Please enter your payment type scally wags,rubles,buckeroos): ");
             String currency = sc.nextLine();
             System.out.print("Please enter your payment amount : ");
             int amount = Integer.parseInt(sc.nextLine());
