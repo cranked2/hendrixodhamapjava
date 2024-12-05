@@ -1,4 +1,4 @@
-package singlefileclasses;
+package shapes;
 
 public class Triangle {
     private double a, b , c;
@@ -25,4 +25,10 @@ public class Triangle {
         return area;
 
     }
+
+    public String toString()
+    {
+        return "P: " + clacPerimeter() + "\nArea " + calcArea();
+    }
+
 }

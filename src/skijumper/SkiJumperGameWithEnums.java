@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.*;
-
 interface Game {
     void startGame();
     void endGame();
@@ -31,9 +30,8 @@ public class SkiJumperGameWithEnums extends JFrame implements Game {
     private JLabel resultLabel;
     private Difficulty difficulty = Difficulty.MEDIUM;
     private int score = 0;
-
     public SkiJumperGameWithEnums() {
-        setTitle("Ski Jumper");
+        setTitle("Ski Jumper Game with Enums and Saving");
         setSize(400, 300);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -91,7 +89,8 @@ public class SkiJumperGameWithEnums extends JFrame implements Game {
         });
         countdownTimer.start();
     }
-    @Override public void endGame() {
+    @Override
+    public void endGame() {
         isJumping = false;
         int jumpDistance = (int)(spaceCount * difficulty.getMultiplier());
         score += jumpDistance;
@@ -99,20 +98,18 @@ public class SkiJumperGameWithEnums extends JFrame implements Game {
         resultLabel.setText("You jumped " + jumpDistance + " meters! Total score: " + score);
         saveScore();
     }
-    @Override public void saveScore() {
+    @Override
+    public void saveScore() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("ski_jumper_scores.txt", true))) {
             writer.write("Difficulty: " + difficulty + ", Score: " + score + "\n");
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error saving score: " + e.getMessage());
         }
     }
-
     public static void main(String[] args) {
+        SkiJumperGameWithEnums game;
         SwingUtilities.invokeLater(() - > {
-                SkiJumperGameWithEnums game = new SkiJumperGameWithEnums();
-                game.setVisible(true);
+                SkiJumperGameWithEnums game = new SkiJumperGameWithEnums();game.setVisible(true);
         });
     }
-}
-
 }
