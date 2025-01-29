@@ -7,32 +7,22 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.*;
-interface Game {
-    void startGame();
-    void endGame();
-    void saveScore();
-}
-enum Difficulty {
-    EASY(1.5), MEDIUM(2.0), HARD(2.5);
-    private final double multiplier;
-    Difficulty(double multiplier) {
-        this.multiplier = multiplier;
-    }
-    public double getMultiplier() {
-        return multiplier;
-    }
-}
-public class SkiJumperGameWithEnums extends JFrame implements Game {
+
+
+
+
+public class SkiJumperGame extends JFrame implements Game {
     private int spaceCount = 0;
     private boolean isJumping = false;
-    private JLabel instructionLabel;
-    private JLabel countdownLabel;
-    private JLabel resultLabel;
+    private final JLabel instructionLabel;
+    private final JLabel countdownLabel;
+    private final JLabel resultLabel;
     private Difficulty difficulty = Difficulty.MEDIUM;
     private int score = 0;
-    public SkiJumperGameWithEnums() {
-        setTitle("Ski Jumper Game with Enums and Saving");
-        setSize(400, 300);
+
+    public SkiJumperGame() {
+        setTitle("Ski Jumper");
+        setSize(500, 300);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         instructionLabel = new JLabel("Press SPACE as fast as you can for 5 seconds!", SwingConstants.CENTER);
@@ -49,22 +39,27 @@ public class SkiJumperGameWithEnums extends JFrame implements Game {
                 }
             }
         });
+
         String[] options = {
                 "EASY",
                 "MEDIUM",
                 "HARD"
         };
+
         String choice = (String) JOptionPane.showInputDialog(this, "Choose Difficulty:", "Difficulty Selection", JOptionPane.QUESTION_MESSAGE, null, options, "MEDIUM");
         if (choice != null) {
             difficulty = Difficulty.valueOf(choice);
         }
         startGame();
     }
-    @Override public void startGame() {
+
+    @Override
+    public void startGame() {
         Timer gameTimer = new Timer(1000, new ActionListener() {
             int timeLeft = 5;
-            @Override public void actionPerformed(ActionEvent e) {
-                if (timeLeft > 0) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (timeLeft >= 0) {
                     countdownLabel.setText("Time left: " + timeLeft + " seconds");
                     timeLeft--;
                 } else {
@@ -73,9 +68,11 @@ public class SkiJumperGameWithEnums extends JFrame implements Game {
                 }
             }
         });
+
         Timer countdownTimer = new Timer(1000, new ActionListener() {
             int countdown = 3;
-            @Override public void actionPerformed(ActionEvent e) {
+            @Override
+             public void actionPerformed(ActionEvent e) {
                 if (countdown > 0) {
                     countdownLabel.setText("Starting in: " + countdown);
                     countdown--;
@@ -89,6 +86,7 @@ public class SkiJumperGameWithEnums extends JFrame implements Game {
         });
         countdownTimer.start();
     }
+
     @Override
     public void endGame() {
         isJumping = false;
@@ -98,6 +96,7 @@ public class SkiJumperGameWithEnums extends JFrame implements Game {
         resultLabel.setText("You jumped " + jumpDistance + " meters! Total score: " + score);
         saveScore();
     }
+
     @Override
     public void saveScore() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("ski_jumper_scores.txt", true))) {
@@ -106,10 +105,6 @@ public class SkiJumperGameWithEnums extends JFrame implements Game {
             JOptionPane.showMessageDialog(this, "Error saving score: " + e.getMessage());
         }
     }
-    public static void main(String[] args) {
-        SkiJumperGameWithEnums game;
-        SwingUtilities.invokeLater(() - > {
-                SkiJumperGameWithEnums game = new SkiJumperGameWithEnums();game.setVisible(true);
-        });
-    }
+
+
 }

@@ -15,6 +15,7 @@ public class theMethod
 
         System.out.println(extended(avg));
 
+
     }
 //user methods
     //return

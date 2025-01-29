@@ -1,6 +1,6 @@
 package shapes;
 
-public class Triangle {
+public class Triangle implements Shape, Comparable {
     private double a, b , c;
 
     public Triangle() //defstrcut
@@ -29,6 +29,17 @@ public class Triangle {
     public String toString()
     {
         return "P: " + clacPerimeter() + "\nArea " + calcArea();
+    }
+
+    public int compareTo(Object obj)
+    {
+        Shape t = (Shape) obj;
+        if(this.calcArea()==t.calcArea())
+            return 0;
+        else if (this.calcArea()<t.calcArea())
+            return -1;
+        else
+            return 1;
     }
 
 }
