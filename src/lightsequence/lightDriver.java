@@ -13,6 +13,8 @@ public class lightDriver
 
         System.out.println(gradShow.insertSegment("000",2));
         gradShow.display();
+
+
     }
 
 }

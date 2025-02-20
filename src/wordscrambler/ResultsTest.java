@@ -1,4 +1,4 @@
-// CMPINF 0401
+package wordscrambler;// CMPINF 0401
 // Test program for Results class.  This program should run
 // without modification with your Results class and should produce output
 // identical to that shown in resultstest.txt 
@@ -7,7 +7,6 @@
 // "results.txt" file using a text editor.  Enter a single 0 on each of 4 lines
 // then save the file.
 
-import java.util.*;
 import java.io.*;
 
 public class ResultsTest

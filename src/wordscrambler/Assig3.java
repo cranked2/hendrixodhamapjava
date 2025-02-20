@@ -1,20 +1,23 @@
+package wordscrambler;
+
 import java.io.*;
 import java.util.*;
 
 public class Assig3 {
     public static void main(String[] args) throws IOException {
         Scanner input = new Scanner(System.in);
+
         System.out.println("Welcome to the Scramble Game!");
         System.out.print("Enter your name: ");
         String playerName = input.nextLine();
-        
-        // Initialize Scramble and Results objects
+
         Scramble scramble = new Scramble("words.txt");
         Results results = new Results("results.txt");
         
-        boolean keepPlaying = true;
-        while (keepPlaying) {
+        String keepPlaying = "yes";
+        while (keepPlaying.equals("yes")) {
             System.out.println("\nNew Round!");
+
             String realWord = scramble.getRealWord();
             if (realWord == null) {
                 System.out.println("No more words available. Game over.");
@@ -45,8 +48,9 @@ public class Assig3 {
             results.update(roundWon, guessCount);
             
             System.out.print("Do you want to play another round? (yes/no): ");
-            keepPlaying = input.nextLine().equalsIgnoreCase("yes");
+            keepPlaying = input.nextLine();
         }
+        
         
         System.out.println("\nGame Over. Here are your results:");
         System.out.println(results);

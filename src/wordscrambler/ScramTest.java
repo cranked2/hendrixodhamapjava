@@ -1,10 +1,10 @@
-// CMPINF 401
+package wordscrambler;// CMPINF 401
 // Test file for Scramble class.  This program should run as is with your Scramble
 // class.  The scrambled versions of the words do not have to exactly match the ones
 // shown in the test execution.
 
 import java.io.*;
-import java.util.*;
+
 public class ScramTest
 {
     public static void main(String[] args) throws IOException

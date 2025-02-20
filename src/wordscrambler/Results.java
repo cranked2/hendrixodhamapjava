@@ -1,3 +1,5 @@
+package wordscrambler;
+
 import java.io.*;
 
 public class Results {

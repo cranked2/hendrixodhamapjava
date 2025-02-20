@@ -1,3 +1,5 @@
+package wordscrambler;
+
 import java.io.*;
 import java.util.*;
 
@@ -14,21 +16,25 @@ public class Scramble {
         }
         currentWord = null;
     }
-    
+
     public String getRealWord() {
         if (words.isEmpty()) return null;
+
         if (currentWord == null || currentWord.equals("")) {
             currentWord = words.remove(0);
+        } else {
+            currentWord = words.remove(0);
         }
+
         return currentWord;
     }
-    
+
+
     public String getScrambledWord() {
         if (currentWord == null) return null;
         char[] chars = currentWord.toCharArray();
-        Random random = new Random();
         for (int i = 0; i < chars.length; i++) {
-            int j = random.nextInt(chars.length);
+            int j = (int) (Math.random() * chars.length);
             char temp = chars[i];
             chars[i] = chars[j];
             chars[j] = temp;

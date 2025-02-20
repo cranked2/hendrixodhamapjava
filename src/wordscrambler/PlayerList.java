@@ -1,8 +1,10 @@
+package wordscrambler;
+
 import java.io.*;
 import java.util.*;
 
 public class PlayerList {
-    private Player[] players;
+    private static Player[] players;
     private int size;
     private static final int INITIAL_CAPACITY = 3;
     private String fileName;
@@ -24,13 +26,13 @@ public class PlayerList {
                 int losses = Integer.parseInt(data[3]);
                 int guesses = Integer.parseInt(data[4]);
                 Player player = new Player(name);
-                player.updateStats(wins > losses, guesses); // Simulate loading stats
+                player.update(wins > losses, guesses);
                 addPlayer(player);
             }
         }
     }
     
-    public Player findPlayer(String name) {
+    public Player getPlayer(String name) {
         for (int i = 0; i < size; i++) {
             if (players[i].getName().equalsIgnoreCase(name)) {
                 return players[i];
@@ -73,4 +75,16 @@ public class PlayerList {
         }
         return result.toString();
     }
+
+    public static Player removePlayer(String val)
+    {
+        for(int k = 0; k < players.length;k++)
+        {
+            if(val.equals(players[k]))
+                players[k] = null;
+                return players[k];
+        }
+        return null;
+    }
+
 }

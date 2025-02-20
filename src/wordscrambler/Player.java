@@ -1,3 +1,5 @@
+package wordscrambler;
+
 public class Player {
     private String name;
     private int rounds;
@@ -21,7 +23,7 @@ public class Player {
         this.guesses = guesses;
     }
 
-    public void updateStats(boolean won, int guessCount) {
+    public void update(boolean won, int guessCount) {
         rounds++;
         if (won) wins++;
         else losses++;
@@ -57,4 +59,5 @@ public class Player {
         return String.format("Player: %s\nRounds: %d\nWins: %d\nLosses: %d\nTotal Guesses: %d\nAverage Guesses per Round: %.2f", 
                              name, rounds, wins, losses, guesses, averageGuesses());
     }
+
 }
